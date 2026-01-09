@@ -10,6 +10,7 @@ use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ClubSettingsController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\AttendanceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,7 +42,9 @@ Route::middleware(['auth', 'role.redirect'])->group(function () {
         Route::get('/schedule', [PlayerController::class, 'schedule'])->name('schedule');
         Route::get('/stats', [PlayerController::class, 'stats'])->name('stats');
         Route::get('/profile', [PlayerController::class, 'profile'])->name('profile');
+        Route::put('/profile', [PlayerController::class, 'updateProfile'])->name('profile.update');
         Route::get('/settings', [PlayerController::class, 'settings'])->name('settings');
+        Route::put('/password', [PlayerController::class, 'updatePassword'])->name('password.update');
     });
     
     // Dashboard Parent (placeholder)
@@ -100,5 +103,14 @@ Route::middleware(['auth', 'role.redirect'])->group(function () {
         Route::post('/trainings/{training}/mark-all-present', [CoachController::class, 'markAllPresent'])->name('mark-all-present');
         Route::post('/trainings/{training}/complete', [CoachController::class, 'completeTraining'])->name('complete-training');
         Route::get('/player-stats', [CoachController::class, 'playerStats'])->name('player-stats');
+    });
+    
+    // Présences (accessible à tous les rôles)
+    Route::prefix('attendance')->name('attendance.')->group(function () {
+        Route::get('/', [AttendanceController::class, 'index'])->name('index');
+        Route::post('/{training}/check-in', [AttendanceController::class, 'checkIn'])->name('check-in');
+        Route::patch('/{training}/participant/{participant}', [AttendanceController::class, 'markAttendance'])->name('mark');
+        Route::post('/{training}/mark-all-present', [AttendanceController::class, 'markAllPresent'])->name('mark-all-present');
+        Route::get('/export', [AttendanceController::class, 'export'])->name('export');
     });
 });

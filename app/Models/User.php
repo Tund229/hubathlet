@@ -129,6 +129,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Les séances d'entraînement auxquelles l'utilisateur participe
+     */
+    public function trainings(): BelongsToMany
+    {
+        return $this->belongsToMany(Training::class, 'training_user')
+            ->withPivot(['status', 'arrived_at', 'left_at', 'duration_minutes', 'notes'])
+            ->withTimestamps();
+    }
+
+    /**
      * Récupère les initiales de l'utilisateur
      */
     public function getInitialsAttribute(): string

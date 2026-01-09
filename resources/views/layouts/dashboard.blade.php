@@ -43,7 +43,7 @@
     </aside>
 
     {{-- Main Content --}}
-    <main class="flex-1 min-h-screen pt-16 lg:pt-0">
+    <main class="flex-1 min-h-screen pt-16 lg:pt-0 bg-slate-50/50 overflow-x-hidden">
         @yield('content')
     </main>
 </div>
