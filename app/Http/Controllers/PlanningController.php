@@ -69,7 +69,34 @@ class PlanningController extends Controller
             ->orderBy('start_time')
             ->get();
 
-        return view('planning.index', compact('club', 'trainings', 'stats', 'todayTrainings', 'view', 'filter', 'type'));
+        // Données pour le calendrier FullCalendar (3 mois avant/après)
+        $calendarEvents = $club->trainings()
+            ->whereBetween('date', [
+                now()->subMonths(3)->startOfMonth(),
+                now()->addMonths(3)->endOfMonth()
+            ])
+            ->get()
+            ->map(function ($training) {
+                return [
+                    'id' => $training->id,
+                    'title' => $training->title,
+                    'start' => $training->date->format('Y-m-d') . 'T' . $training->start_time,
+                    'end' => $training->date->format('Y-m-d') . 'T' . $training->end_time,
+                    'url' => route('planning.show', $training),
+                    'backgroundColor' => $training->type_color,
+                    'borderColor' => $training->type_color,
+                    'extendedProps' => [
+                        'type' => $training->type,
+                        'typeLabel' => $training->type_label,
+                        'location' => $training->location,
+                        'time' => Carbon::parse($training->start_time)->format('H:i') . ' - ' . Carbon::parse($training->end_time)->format('H:i'),
+                        'status' => $training->status,
+                        'participantsCount' => $training->participants->count(),
+                    ],
+                ];
+            });
+
+        return view('planning.index', compact('club', 'trainings', 'stats', 'todayTrainings', 'view', 'filter', 'type', 'calendarEvents'));
     }
 
     /**

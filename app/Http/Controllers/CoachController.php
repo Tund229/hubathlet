@@ -152,7 +152,35 @@ class CoachController extends Controller
             'meeting' => 'Réunion',
         ];
 
-        return view('coach.trainings', compact('trainings', 'trainingTypes'));
+        // Données pour le calendrier FullCalendar
+        $calendarEvents = Training::where('club_id', $club->id)
+            ->where('coach_id', $user->id)
+            ->whereBetween('date', [
+                Carbon::now()->subMonths(3)->startOfMonth(),
+                Carbon::now()->addMonths(3)->endOfMonth()
+            ])
+            ->get()
+            ->map(function ($training) {
+                return [
+                    'id' => $training->id,
+                    'title' => $training->title,
+                    'start' => $training->date->format('Y-m-d') . 'T' . $training->start_time,
+                    'end' => $training->date->format('Y-m-d') . 'T' . $training->end_time,
+                    'url' => route('coach.attendance', $training),
+                    'backgroundColor' => $training->type_color,
+                    'borderColor' => $training->type_color,
+                    'extendedProps' => [
+                        'type' => $training->type,
+                        'typeLabel' => $training->type_label,
+                        'location' => $training->location,
+                        'time' => Carbon::parse($training->start_time)->format('H:i') . ' - ' . Carbon::parse($training->end_time)->format('H:i'),
+                        'status' => $training->status,
+                        'participantsCount' => $training->participants->count(),
+                    ],
+                ];
+            });
+
+        return view('coach.trainings', compact('trainings', 'trainingTypes', 'calendarEvents'));
     }
 
     /**

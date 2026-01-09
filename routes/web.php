@@ -9,6 +9,7 @@ use App\Http\Controllers\PlanningController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ClubSettingsController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\PlayerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,23 +35,13 @@ Route::middleware(['auth', 'role.redirect'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     
-    // Dashboard Joueur (placeholder)
+    // Espace Joueur
     Route::prefix('player')->name('player.')->group(function () {
-        Route::get('/', function () {
-            return view('player.dashboard');
-        })->name('dashboard');
-        Route::get('/schedule', function () {
-            return view('player.schedule');
-        })->name('schedule');
-        Route::get('/stats', function () {
-            return view('player.stats');
-        })->name('stats');
-        Route::get('/profile', function () {
-            return view('player.profile');
-        })->name('profile');
-        Route::get('/settings', function () {
-            return view('player.settings');
-        })->name('settings');
+        Route::get('/', [PlayerController::class, 'dashboard'])->name('dashboard');
+        Route::get('/schedule', [PlayerController::class, 'schedule'])->name('schedule');
+        Route::get('/stats', [PlayerController::class, 'stats'])->name('stats');
+        Route::get('/profile', [PlayerController::class, 'profile'])->name('profile');
+        Route::get('/settings', [PlayerController::class, 'settings'])->name('settings');
     });
     
     // Dashboard Parent (placeholder)
