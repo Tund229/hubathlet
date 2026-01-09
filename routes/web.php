@@ -8,6 +8,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlanningController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ClubSettingsController;
+use App\Http\Controllers\CoachController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,11 +28,46 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showRese
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update')->middleware('guest');
 
 // Routes protégées (authentifié)
-Route::middleware('auth')->group(function () {
-    // Dashboard
+Route::middleware(['auth', 'role.redirect'])->group(function () {
+    // Dashboard Admin (Owner/Admin/Moderator)
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    
+    // Dashboard Joueur (placeholder)
+    Route::prefix('player')->name('player.')->group(function () {
+        Route::get('/', function () {
+            return view('player.dashboard');
+        })->name('dashboard');
+        Route::get('/schedule', function () {
+            return view('player.schedule');
+        })->name('schedule');
+        Route::get('/stats', function () {
+            return view('player.stats');
+        })->name('stats');
+        Route::get('/profile', function () {
+            return view('player.profile');
+        })->name('profile');
+        Route::get('/settings', function () {
+            return view('player.settings');
+        })->name('settings');
+    });
+    
+    // Dashboard Parent (placeholder)
+    Route::prefix('parent')->name('parent.')->group(function () {
+        Route::get('/', function () {
+            return view('parent.dashboard');
+        })->name('dashboard');
+        Route::get('/children', function () {
+            return view('parent.children');
+        })->name('children');
+        Route::get('/schedule', function () {
+            return view('parent.schedule');
+        })->name('schedule');
+        Route::get('/profile', function () {
+            return view('parent.profile');
+        })->name('profile');
+    });
     
     // Membres
     Route::resource('members', MemberController::class);
@@ -60,5 +96,18 @@ Route::middleware('auth')->group(function () {
         Route::put('/customization', [ClubSettingsController::class, 'updateCustomization'])->name('customization.update');
         Route::get('/settings', [ClubSettingsController::class, 'settings'])->name('settings');
         Route::put('/settings', [ClubSettingsController::class, 'updateSettings'])->name('settings.update');
+    });
+    
+    // Espace Coach
+    Route::prefix('coach')->name('coach.')->group(function () {
+        Route::get('/', [CoachController::class, 'dashboard'])->name('dashboard');
+        Route::get('/trainings', [CoachController::class, 'trainings'])->name('trainings');
+        Route::get('/trainings/{training}/attendance', [CoachController::class, 'attendance'])->name('attendance');
+        Route::patch('/trainings/{training}/participants/{participant}/attendance', [CoachController::class, 'updateAttendance'])->name('update-attendance');
+        Route::post('/trainings/{training}/participants', [CoachController::class, 'addParticipant'])->name('add-participant');
+        Route::delete('/trainings/{training}/participants/{participant}', [CoachController::class, 'removeParticipant'])->name('remove-participant');
+        Route::post('/trainings/{training}/mark-all-present', [CoachController::class, 'markAllPresent'])->name('mark-all-present');
+        Route::post('/trainings/{training}/complete', [CoachController::class, 'completeTraining'])->name('complete-training');
+        Route::get('/player-stats', [CoachController::class, 'playerStats'])->name('player-stats');
     });
 });

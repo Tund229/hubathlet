@@ -16,6 +16,13 @@ class Training extends Model
     const TYPE_EVENT = 'event';
     const TYPE_MEETING = 'meeting';
 
+    const TYPES = [
+        self::TYPE_TRAINING => 'Entraînement',
+        self::TYPE_MATCH => 'Match',
+        self::TYPE_EVENT => 'Événement',
+        self::TYPE_MEETING => 'Réunion',
+    ];
+
     // Statuts
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_ONGOING = 'ongoing';
@@ -131,7 +138,15 @@ class Training extends Model
 
     public function getTypeColorAttribute()
     {
-        return match($this->type) {
+        return self::getTypeColor($this->type);
+    }
+
+    /**
+     * Obtenir la couleur pour un type donné (méthode statique)
+     */
+    public static function getTypeColor(string $type): string
+    {
+        return match($type) {
             self::TYPE_TRAINING => '#10B981', // Emerald
             self::TYPE_MATCH => '#3B82F6',    // Blue
             self::TYPE_EVENT => '#8B5CF6',    // Violet
