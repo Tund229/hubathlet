@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlanningController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\ClubSettingsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,4 +49,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/statistics/members', [StatisticsController::class, 'members'])->name('statistics.members');
     Route::get('/statistics/members/{member}', [StatisticsController::class, 'member'])->name('statistics.member');
     Route::get('/statistics/trainings', [StatisticsController::class, 'trainings'])->name('statistics.trainings');
+    
+    // Club Settings
+    Route::prefix('club')->name('club.')->group(function () {
+        Route::get('/', [ClubSettingsController::class, 'index'])->name('index');
+        Route::get('/edit', [ClubSettingsController::class, 'edit'])->name('edit');
+        Route::put('/update', [ClubSettingsController::class, 'update'])->name('update');
+        Route::delete('/logo', [ClubSettingsController::class, 'deleteLogo'])->name('delete-logo');
+        Route::get('/customization', [ClubSettingsController::class, 'customization'])->name('customization');
+        Route::put('/customization', [ClubSettingsController::class, 'updateCustomization'])->name('customization.update');
+        Route::get('/settings', [ClubSettingsController::class, 'settings'])->name('settings');
+        Route::put('/settings', [ClubSettingsController::class, 'updateSettings'])->name('settings.update');
+    });
 });
