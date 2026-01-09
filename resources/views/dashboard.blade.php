@@ -290,29 +290,6 @@
                     Voir toute l'activité
                 </button>
             </div>
-
-            <!-- Plan Status -->
-            <div class="bg-slate-900 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/20 rounded-full blur-2xl"></div>
-                
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-bold text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full">ESSAI GRATUIT</span>
-                        <span class="text-xs text-slate-500">12 jours restants</span>
-                    </div>
-                    
-                    <h3 class="text-lg font-bold text-white mb-2">Passez à la version Pro</h3>
-                    <p class="text-sm text-slate-400 mb-4">Débloquez toutes les fonctionnalités pour votre club.</p>
-                    
-                    <div class="w-full bg-slate-800 rounded-full h-2 mb-4">
-                        <div class="bg-emerald-500 h-2 rounded-full" style="width: 14%"></div>
-                    </div>
-                    
-                    <button class="w-full bg-emerald-500 text-white py-3 rounded-xl font-bold text-sm hover:bg-emerald-600 transition-colors">
-                        Voir les offres
-                    </button>
-                </div>
-            </div>
         </div>
     </div>
 

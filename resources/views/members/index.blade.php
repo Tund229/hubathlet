@@ -237,8 +237,8 @@
             
             <!-- Pagination -->
             @if($members->hasPages())
-                <div class="px-6 py-4 border-t border-slate-100">
-                    {{ $members->links() }}
+                <div class="px-4 sm:px-6 py-4 bg-slate-50/50 border-t border-slate-100 rounded-b-[1.5rem] sm:rounded-b-[2rem]">
+                    {{ $members->withQueryString()->links() }}
                 </div>
             @endif
         @endif
