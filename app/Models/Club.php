@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Club extends Model
@@ -35,6 +36,30 @@ class Club extends Model
     public function settings(): HasOne
     {
         return $this->hasOne(ClubSetting::class);
+    }
+
+    /**
+     * Les séances/entraînements du club
+     */
+    public function trainings(): HasMany
+    {
+        return $this->hasMany(Training::class);
+    }
+
+    /**
+     * Séances à venir
+     */
+    public function upcomingTrainings(): HasMany
+    {
+        return $this->trainings()->upcoming();
+    }
+
+    /**
+     * Séances passées
+     */
+    public function pastTrainings(): HasMany
+    {
+        return $this->trainings()->past();
     }
 
     /**
