@@ -111,29 +111,46 @@
                     @php
                         $role = \App\Models\Role::find($member->pivot->role_id);
                     @endphp
-                    <a href="{{ route('members.edit', $member) }}" class="flex items-center gap-4 p-4 hover:bg-slate-50 transition-colors">
-                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg" style="background-color: {{ $role->color ?? '#6B7280' }}">
-                            {{ $member->initials }}
+                    <div class="p-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg" style="background-color: {{ $role->color ?? '#6B7280' }}">
+                                {{ $member->initials }}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="font-bold text-slate-900 truncate">{{ $member->name }}</div>
+                                <div class="text-sm text-slate-500 truncate">{{ $role->name ?? 'Membre' }}</div>
+                            </div>
+                            <div class="flex flex-col items-end gap-1">
+                                @if($member->pivot->status == 'active')
+                                    <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">Actif</span>
+                                @elseif($member->pivot->status == 'pending')
+                                    <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">En attente</span>
+                                @elseif($member->pivot->status == 'inactive')
+                                    <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Inactif</span>
+                                @else
+                                    <span class="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full">Suspendu</span>
+                                @endif
+                                @if($member->pivot->jersey_number)
+                                    <span class="text-xs text-slate-400">#{{ $member->pivot->jersey_number }}</span>
+                                @endif
+                            </div>
                         </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="font-bold text-slate-900 truncate">{{ $member->name }}</div>
-                            <div class="text-sm text-slate-500 truncate">{{ $role->name ?? 'Membre' }}</div>
+                        <!-- Actions mobiles -->
+                        <div class="flex items-center gap-2 mt-3 pt-3 border-t border-slate-100">
+                            <a href="{{ route('statistics.member', $member) }}" class="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-violet-50 text-violet-600 rounded-lg text-sm font-semibold hover:bg-violet-100 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                Stats
+                            </a>
+                            <a href="{{ route('members.edit', $member) }}" class="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-sm font-semibold hover:bg-slate-200 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                Modifier
+                            </a>
                         </div>
-                        <div class="flex flex-col items-end gap-1">
-                            @if($member->pivot->status == 'active')
-                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">Actif</span>
-                            @elseif($member->pivot->status == 'pending')
-                                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs font-bold rounded-full">En attente</span>
-                            @elseif($member->pivot->status == 'inactive')
-                                <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Inactif</span>
-                            @else
-                                <span class="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full">Suspendu</span>
-                            @endif
-                            @if($member->pivot->jersey_number)
-                                <span class="text-xs text-slate-400">#{{ $member->pivot->jersey_number }}</span>
-                            @endif
-                        </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
             
@@ -213,7 +230,12 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex items-center justify-end gap-2">
-                                        <a href="{{ route('members.edit', $member) }}" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-emerald-100 hover:text-emerald-600 transition-colors">
+                                        <a href="{{ route('statistics.member', $member) }}" class="w-9 h-9 flex items-center justify-center rounded-lg bg-violet-100 text-violet-600 hover:bg-violet-200 hover:text-violet-700 transition-colors" title="Voir les stats">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                            </svg>
+                                        </a>
+                                        <a href="{{ route('members.edit', $member) }}" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-emerald-100 hover:text-emerald-600 transition-colors" title="Modifier">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
@@ -221,7 +243,7 @@
                                         <form action="{{ route('members.destroy', $member) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir retirer ce membre ?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors">
+                                            <button type="submit" class="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors" title="Supprimer">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PlanningController;
+use App\Http\Controllers\StatisticsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,4 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/planning/{planning}/participants', [PlanningController::class, 'addParticipant'])->name('planning.add-participant');
     Route::delete('/planning/{planning}/participants/{user}', [PlanningController::class, 'removeParticipant'])->name('planning.remove-participant');
     Route::patch('/planning/{planning}/participants/{user}/attendance', [PlanningController::class, 'updateAttendance'])->name('planning.update-attendance');
+    
+    // Statistiques
+    Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
+    Route::get('/statistics/members', [StatisticsController::class, 'members'])->name('statistics.members');
+    Route::get('/statistics/members/{member}', [StatisticsController::class, 'member'])->name('statistics.member');
+    Route::get('/statistics/trainings', [StatisticsController::class, 'trainings'])->name('statistics.trainings');
 });
