@@ -149,7 +149,7 @@ class StatisticsController extends Controller
             ->where('status', 'completed')
             ->with('participants')
             ->orderBy('date', 'desc')
-            ->paginate(15);
+            ->paginate(10);
 
         // Stats par jour de la semaine
         $dayStats = $this->getDayOfWeekStats($club, $startDate);

@@ -148,100 +148,266 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center pt-24 pb-16 px-4 overflow-hidden bg-slate-50">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
-            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-200/30 rounded-full blur-[120px]"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-100/40 rounded-full blur-[120px]"></div>
-            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div>
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 px-4 overflow-hidden bg-slate-50">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-200/40 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-blue-200/30 rounded-full blur-[100px]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-100/20 rounded-full blur-[80px]"></div>
         </div>
 
         <div class="max-w-7xl mx-auto w-full">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
-                <div class="lg:col-span-5 space-y-10">
+                <!-- Text Content -->
+                <div class="lg:col-span-5 space-y-8">
                     <div class="space-y-6">
-                        <h1 class="text-6xl xl:text-7xl font-black text-slate-900 leading-[0.95] tracking-tighter">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 rounded-full border border-emerald-100">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                            <span class="text-sm font-semibold text-emerald-700">+500 clubs nous font confiance</span>
+                        </div>
+                        <h1 class="text-5xl sm:text-6xl xl:text-7xl font-black text-slate-900 leading-[0.95] tracking-tighter">
                             Gérez votre club <br>
                             <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">sans effort.</span>
                         </h1>
                         <p class="text-lg md:text-xl text-slate-600 leading-relaxed max-w-md">
-                            L'interface intuitive qui centralise vos licenciés, vos finances et vos événements en un clic.
+                            La plateforme tout-en-un qui centralise membres, planning et statistiques dans une interface moderne.
                         </p>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#" class="px-8 py-4 bg-emerald-600 text-white rounded-full font-bold text-center hover:bg-emerald-700 transition-all shadow-[0_20px_50px_rgba(16,185,129,0.3)] hover:-translate-y-1">
-                            Démarrer l'essai
+                        <a href="{{ route('register') }}" class="px-8 py-4 bg-emerald-500 text-white rounded-2xl font-bold text-center hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/25 hover:-translate-y-0.5">
+                            Démarrer gratuitement
                         </a>
-                        <button class="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-full font-bold text-center hover:bg-slate-50 transition-all flex items-center justify-center gap-2">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
-                            Démo vidéo
-                        </button>
+                        <a href="#fonctionnalites" class="px-8 py-4 bg-white text-slate-900 border border-slate-200 rounded-2xl font-bold text-center hover:bg-slate-50 hover:border-slate-300 transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            Découvrir
+                        </a>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-slate-200">
-                        <div>
-                            <div class="text-3xl font-black text-slate-900">98%</div>
-                            <div class="text-sm text-slate-500 font-medium uppercase tracking-widest">Satisfaction</div>
+                    <div class="flex items-center gap-6 pt-6">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white font-bold text-sm">M</div>
+                            <div class="w-10 h-10 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-white font-bold text-sm">A</div>
+                            <div class="w-10 h-10 rounded-full bg-violet-500 border-2 border-white flex items-center justify-center text-white font-bold text-sm">L</div>
+                            <div class="w-10 h-10 rounded-full bg-amber-500 border-2 border-white flex items-center justify-center text-white font-bold text-sm">+</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-black text-slate-900">+12k</div>
-                            <div class="text-sm text-slate-500 font-medium uppercase tracking-widest">Utilisateurs</div>
+                            <div class="flex items-center gap-1">
+                                @for($i = 0; $i < 5; $i++)
+                                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                @endfor
+                            </div>
+                            <p class="text-sm text-slate-500">4.9/5 sur 200+ avis</p>
                         </div>
                     </div>
                 </div>
 
+                <!-- Dashboard Preview -->
                 <div class="lg:col-span-7 relative">
-                    <div class="relative w-full aspect-[4/3]">
+                    <!-- Main Dashboard Card -->
+                    <div class="relative bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+                        <!-- Header bar -->
+                        <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <span class="font-bold text-slate-900">FC Hubathlet</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                </div>
+                                <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-xs">JD</div>
+                            </div>
+                        </div>
                         
-                        <div class="absolute inset-0 bg-white rounded-[2rem] shadow-2xl border border-slate-100 p-6 overflow-hidden transform rotate-2">
-                            <div class="flex items-center justify-between mb-8">
-                                <div class="h-6 w-32 bg-slate-100 rounded-full"></div>
+                        <!-- Dashboard Content -->
+                        <div class="p-5 space-y-4">
+                            <!-- Stats Row -->
+                            <div class="grid grid-cols-4 gap-3">
+                                <div class="bg-white rounded-xl p-3 border border-slate-100 shadow-sm">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">+12%</span>
+                                    </div>
+                                    <div class="text-xl font-black text-slate-900">48</div>
+                                    <div class="text-[10px] text-slate-500 font-medium">Membres</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-slate-100 shadow-sm">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">Excellent</span>
+                                    </div>
+                                    <div class="text-xl font-black text-slate-900">92%</div>
+                                    <div class="text-[10px] text-slate-500 font-medium">Présence</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-slate-100 shadow-sm">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="w-8 h-8 bg-violet-100 rounded-lg flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-violet-600 bg-violet-50 px-1.5 py-0.5 rounded">Ce mois</span>
+                                    </div>
+                                    <div class="text-xl font-black text-slate-900">16</div>
+                                    <div class="text-[10px] text-slate-500 font-medium">Séances</div>
+                                </div>
+                                <div class="bg-white rounded-xl p-3 border border-slate-100 shadow-sm">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">Total</span>
+                                    </div>
+                                    <div class="text-xl font-black text-slate-900">124<span class="text-sm">h</span></div>
+                                    <div class="text-[10px] text-slate-500 font-medium">Heures</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Chart + Top members -->
+                            <div class="grid grid-cols-5 gap-3">
+                                <!-- Weekly Chart -->
+                                <div class="col-span-3 bg-white rounded-xl p-4 border border-slate-100 shadow-sm">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-xs font-bold text-slate-900">Présence hebdomadaire</span>
+                                        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                                    </div>
+                                    <div class="flex items-end justify-between gap-1.5 h-20">
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-emerald-500 rounded" style="height: 85%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">L</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-emerald-500 rounded" style="height: 92%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">M</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-emerald-500 rounded" style="height: 78%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">M</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-emerald-500 rounded" style="height: 95%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">J</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-amber-500 rounded" style="height: 65%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">V</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-emerald-500 rounded" style="height: 88%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">S</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <div class="w-full bg-slate-100 rounded relative" style="height: 60px;">
+                                                <div class="absolute bottom-0 left-0 right-0 bg-slate-300 rounded" style="height: 40%;"></div>
+                                            </div>
+                                            <span class="text-[9px] text-slate-400 font-medium">D</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Top Members mini -->
+                                <div class="col-span-2 bg-white rounded-xl p-4 border border-slate-100 shadow-sm">
+                                    <span class="text-xs font-bold text-slate-900 mb-3 block">Top présences</span>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-5 h-5 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-[10px] font-black">1</span>
+                                            <div class="w-6 h-6 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-[10px]">ML</div>
+                                            <span class="text-[11px] font-medium text-slate-700 flex-1 truncate">Marie L.</span>
+                                            <span class="text-[10px] font-bold text-emerald-600">98%</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px] font-black">2</span>
+                                            <div class="w-6 h-6 rounded-lg bg-blue-500 flex items-center justify-center text-white font-bold text-[10px]">TD</div>
+                                            <span class="text-[11px] font-medium text-slate-700 flex-1 truncate">Thomas D.</span>
+                                            <span class="text-[10px] font-bold text-emerald-600">95%</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-5 h-5 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-[10px] font-black">3</span>
+                                            <div class="w-6 h-6 rounded-lg bg-violet-500 flex items-center justify-center text-white font-bold text-[10px]">SB</div>
+                                            <span class="text-[11px] font-medium text-slate-700 flex-1 truncate">Sophie B.</span>
+                                            <span class="text-[10px] font-bold text-emerald-600">93%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Upcoming Sessions -->
+                            <div class="bg-white rounded-xl p-4 border border-slate-100 shadow-sm">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-bold text-slate-900">Prochaines séances</span>
+                                    <span class="text-[10px] font-semibold text-emerald-600">Voir tout →</span>
+                                </div>
                                 <div class="flex gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-emerald-50"></div>
-                                    <div class="w-8 h-8 rounded-full bg-slate-50"></div>
-                                </div>
-                            </div>
-                            <div class="space-y-4">
-                                <div class="h-40 w-full bg-slate-50 rounded-2xl border border-dashed border-slate-200 flex items-center justify-center">
-                                    <svg class="w-12 h-12 text-slate-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-                                </div>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div class="h-20 bg-emerald-50 rounded-xl"></div>
-                                    <div class="h-20 bg-slate-50 rounded-xl"></div>
-                                    <div class="h-20 bg-slate-50 rounded-xl"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="absolute -top-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 animate-bounce-slow">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-200">
-                                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                                </div>
-                                <div>
-                                    <div class="text-sm text-slate-500 font-medium">Nouveaux membres</div>
-                                    <div class="text-xl font-bold text-slate-900">+128 cette semaine</div>
+                                    <div class="flex-1 flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
+                                        <div class="w-10 h-10 bg-emerald-500 rounded-lg flex flex-col items-center justify-center text-white">
+                                            <span class="text-[8px] font-bold uppercase">Jan</span>
+                                            <span class="text-sm font-black leading-none">12</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-[11px] font-semibold text-slate-900 truncate">Entraînement Seniors</div>
+                                            <div class="text-[10px] text-slate-500">19:00 - 21:00</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 flex items-center gap-2 p-2 bg-slate-50 rounded-lg">
+                                        <div class="w-10 h-10 bg-blue-500 rounded-lg flex flex-col items-center justify-center text-white">
+                                            <span class="text-[8px] font-bold uppercase">Jan</span>
+                                            <span class="text-sm font-black leading-none">14</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="text-[11px] font-semibold text-slate-900 truncate">Match Amical</div>
+                                            <div class="text-[10px] text-slate-500">15:00 - 17:00</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="absolute -bottom-10 right-10 bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-2xl border border-white/20 w-64">
-                            <div class="flex justify-between items-end mb-4">
-                                <div class="text-sm font-bold text-slate-900">Cotisations</div>
-                                <div class="text-emerald-500 text-xs font-bold">+12%</div>
-                            </div>
-                            <div class="flex gap-1 items-end h-12">
-                                <div class="flex-1 bg-emerald-100 rounded-t-sm h-[40%]"></div>
-                                <div class="flex-1 bg-emerald-200 rounded-t-sm h-[60%]"></div>
-                                <div class="flex-1 bg-emerald-300 rounded-t-sm h-[80%]"></div>
-                                <div class="flex-1 bg-emerald-500 rounded-t-sm h-[100%] shadow-lg shadow-emerald-200"></div>
-                                <div class="flex-1 bg-emerald-200 rounded-t-sm h-[70%]"></div>
-                            </div>
-                        </div>
-
-                        <div class="absolute -right-20 -top-20 w-64 h-64 border-[32px] border-emerald-50 rounded-full -z-10"></div>
                     </div>
+                    
+                    <!-- Floating attendance card -->
+                    <div class="absolute -bottom-4 -right-4 sm:-right-8 bg-gradient-to-br from-slate-800 to-slate-900 p-4 rounded-xl shadow-xl z-10" style="animation: float 5s ease-in-out infinite; animation-delay: 1s;">
+                        <div class="text-[10px] text-slate-400 font-medium mb-1">Taux de présence</div>
+                        <div class="flex items-end gap-2">
+                            <span class="text-2xl font-black text-white">92%</span>
+                            <span class="text-xs font-bold text-emerald-400 mb-1">↑ +5%</span>
+                        </div>
+                        <div class="w-24 bg-slate-700 rounded-full h-1.5 mt-2">
+                            <div class="h-1.5 rounded-full bg-emerald-500" style="width: 92%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative elements -->
+                    <div class="absolute -right-12 -top-12 w-48 h-48 border-[24px] border-emerald-100 rounded-full -z-10 opacity-50"></div>
+                    <div class="absolute -left-8 -bottom-8 w-32 h-32 border-[16px] border-blue-100 rounded-full -z-10 opacity-50"></div>
                 </div>
             </div>
         </div>
